@@ -1,0 +1,32 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+
+<h1>Login</h1>
+<span style="color:red">{{error}}</span>
+<span style="color:rgb(0, 119, 255)">{{success}}</span>
+
+<p><a href="/passport/login">로그인</a></p>
+
+ <form action="/passport/signup_process" method="post">
+          <section>
+              <label for="username">이름</label>
+              <input id="username" name="username" type="text" placeholder="이름" required>
+          </section>
+         <section>
+              <label for="email">이메일</label>
+              <input id="email" name="email" type="email" placeholder="이메일" required>
+          </section>          
+          <section>
+              <label for="password">비밀번호</label>
+              <input id="password" name="password" type="password" autocomplete="new-password" placeholder="비밀번호" required>
+          </section>
+          <section>
+              <label for="password">비밀번호확인</label>
+              <input id="password" name="pw2" type="password" autocomplete="new-password" placeholder="비밀번호확인" required>
+          </section>          
+          <button type="submit">Sign up</button>
+</form>
+
+
+{% endblock %}

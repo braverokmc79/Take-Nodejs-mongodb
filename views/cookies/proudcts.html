@@ -1,0 +1,23 @@
+{% extends '../layout.html' %}
+
+
+{% block content %}
+
+<h1>Products</h1>
+<div id="output">
+    {{output  | safe}}
+</div>
+
+<br>
+<!-- 
+<ul>
+{% for item in products %}
+    <li>{{item.title}}</li>
+{% endfor %}
+</ul> 
+-->
+
+<a href="/cookies/cart">Cart</a>
+
+
+{% endblock %}

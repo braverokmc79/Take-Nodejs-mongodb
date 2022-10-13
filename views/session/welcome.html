@@ -1,0 +1,17 @@
+{% extends '../layout.html' %}
+
+
+{% block content %}
+
+
+{% if session.displayName %}
+  <h1>Hello, {{session.displayName}}</h1>
+  <a href="/session/auth/logout">Logout</a>
+{% else %}
+  <h1>Welcome</h1>
+  <a href="/session/auth/login">Login</a>
+{% endif %}
+
+
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+
+<h1>Login</h1>
+<p><a href="/passport/signup">회원가입</a></p>
+
+<span style="color:red">{{error}}</span>
+<span style="color:rgb(0, 119, 255)">{{success}}</span>
+
+
+
+  <form action="/passport/login_process" method="post">
+              <p><input type="email" name="email" placeholder="email"></p>  
+              <p><input type="password" name="password" placeholder="password"></p>                                 
+              <p>
+                <input type="submit" value="login">
+
+   
+                <a class="btn facebook" href="/passport/login/federated/facebook"><span class="icon">페이스북으로 로그인</span></a>
+              </p>
+</form>
+
+{% endblock %}

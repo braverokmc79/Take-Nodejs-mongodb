@@ -1,0 +1,20 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+
+<h1>Login</h1>
+<p><a href="/session/auth/register">회원가입</a></p>
+
+<span style="color:red">{{error}}</span>
+<span style="color:rgb(0, 119, 255)">{{msg}}</span>
+
+<form action="/session/auth/login" method="post">
+    <p><input type="text" name="username" placeholder="username"></p>
+    <p><input type="password" name="password" placeholder="password"></p>
+    <p>
+        <input type="submit">
+    </p>
+</form>
+
+
+{% endblock %}

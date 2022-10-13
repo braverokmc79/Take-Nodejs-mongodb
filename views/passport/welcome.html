@@ -1,0 +1,18 @@
+{% extends '../layout.html' %}
+
+{% block content %}
+
+<h1>WELCOME</h1><br/>
+
+{% if user %}
+<h2>{{user.username}}  님 환영합니다.  &nbsp;&nbsp;<a href="/passport/logout">로그아웃</a></h2>
+
+
+{% else  %}
+<p><a href="/passport/login">로그인</a>&nbsp;&nbsp;<a href="/passport/signup">회원가입</a></p>
+{% endif %}
+
+
+
+{% endblock %}
+
