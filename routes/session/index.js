@@ -3,7 +3,7 @@ const router = express.Router();
 const md5 = require('md5');
 const sha256 = require('sha256');
 const crypto = require('crypto');
-const db = require('../../lib/db');
+const db = require('../../lib/mongodb');
 
 
 router.get('/count', function (req, res, next) {

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require("../../lib/db");
+const { User } = require("../../models/User");
 global.crypto = require('crypto')
 
 module.exports = function (passport) {
@@ -82,34 +82,31 @@ module.exports = function (passport) {
 
             crypto.pbkdf2(req.body.password.trim(), salt, 310000, 32, 'sha256', function (err, hashedPassword) {
                 console.log("회원가입 데이터 : ", req.body.password, salt, hashedPassword.toString('hex'));
-
                 if (err) { return next(err); }
-                db.query('INSERT INTO users (username,email, hashed_password, salt) VALUES (?, ?, ?, ?)', [
-                    req.body.username,
-                    req.body.email,
-                    hashedPassword.toString('hex'),
-                    salt
-                ], function (err, results, fields) {
 
+
+                const user = new User(
+                    {
+                        username: req.body.username,
+                        email: req.body.email,
+                        password: hashedPassword.toString('hex'),
+                        salt: salt
+                    });
+
+                user.save((err, doc) => {
                     if (err) {
-                        req.flash("error", "이이 등록된  처리된 아이디 혹은 이메일 입니다.");
+                        console.log(" 회원 가입 오류 : ", err);
+                        //req.flash("error", "이이 등록된  처리된 아이디 혹은 이메일 입니다.");
+                        req.flash("error", err.toString());
                         return res.redirect('/passport/signup');
                     }
+                    console.log("회원가입 성공후 반환처리된 유저 값  :", doc);
 
-                    var user = {
-                        id: this.lastID,
-                        username: req.body.username
-                    };
-
-                    console.log("등록한 insertId :", results.insertId);
-
-                    req.login(user, function (err) {
+                    req.login(doc, function (err) {
                         if (err) { return next(err); }
                         req.flash("success", "회원가입을 축하합니다.");
                         res.redirect('/passport/login');
                     });
-
-
                 });
             });
 
